@@ -1,0 +1,29 @@
+import requests
+from bs4 import BeautifulSoup
+# from selenium.webdriver import Firefox
+# from selenium.webdriver.firefox.options import Options
+# opts = Options()
+# opts.set_headless()
+# assert opts.headless  # Operating in headless mode
+# browser = Firefox(executable_path=r"C:\FireFox-WebDriver\geckodriver.exe",options=opts)
+url = 'https://subscene.com/subtitles/'
+user_input = input('Enter the name of movie: ')
+movie_url = url + user_input
+# print(movie_url)
+sub_list = []
+sub_titles = []
+souce_page = requests.get(movie_url)
+soup = BeautifulSoup(souce_page.content,'html.parser')
+for x in soup.find_all('td',{'class':'a1'}):
+    sub_list.append('https://subscene.com' +(x.a.get('href')))
+for y in soup.find_all('td',{'class':'a1'}):
+    sub_titles.append(y.text.replace('\t','').replace('\n','').replace('\r',''))
+
+sub_dict = {}
+for x,y in list(zip(sub_titles,sub_list)):
+    print(x,y)
+
+movie_name = input('copy paste full movie name: ')
+for c in sub_dict:
+    if movie_name == c:
+        print(movie_name,sub_dict[movie_name])
