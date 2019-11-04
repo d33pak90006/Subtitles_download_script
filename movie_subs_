@@ -9,7 +9,6 @@ from bs4 import BeautifulSoup
 url = 'https://subscene.com/subtitles/'
 user_input = input('Enter the name of movie: ')
 movie_url = url + user_input
-# print(movie_url)
 sub_list = []
 sub_titles = []
 souce_page = requests.get(movie_url)
