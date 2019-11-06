@@ -21,7 +21,7 @@ for y in soup.find_all('td',{'class':'a1'}):
 sub_dict = {}
 for x,y in list(zip(sub_titles,sub_list)):
     print(x,y)
-
+# Enter the move subs name
 movie_name = input('copy paste full movie name: ')
 for c in sub_dict:
     if movie_name == c:
