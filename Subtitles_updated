@@ -39,7 +39,7 @@ for x,y in zip(new_spa,sub_list):
 
 
 
-
+# Test Scripting Notes
 # for y in new_spa:
 #     new_sch.append(y[0].lstrip())
 #     old_sch.append(y[1].lstrip())
