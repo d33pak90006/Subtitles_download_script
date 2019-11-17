@@ -1,0 +1,55 @@
+import requests
+import pandas as pd
+import itertools
+from bs4 import BeautifulSoup
+# from selenium.webdriver import Firefox
+# from selenium.webdriver.firefox.options import Options
+# opts = Options()
+# opts.set_headless()
+# assert opts.headless  # Operating in headless mode
+# browser = Firefox(executable_path=r"C:\FireFox-WebDriver\geckodriver.exe",options=opts)
+url = 'https://subscene.com/subtitles/'
+user_input = input('Enter the name of movie: ')
+movie_url = url + user_input
+# print(movie_url)
+sub_list = []
+sub_titles = []
+souce_page = requests.get(movie_url)
+soup = BeautifulSoup(souce_page.content,'html.parser')
+for x in soup.find_all('td',{'class':'a1'}):
+    sub_list.append('https://subscene.com' +(x.a.get('href')) +"\t")
+for y in soup.find_all('td',{'class':'a1'}):
+    sub_titles.append(y.text.replace('\t','').replace('\n',' ').replace('\r','').strip(' '))
+new_spa = []
+old_sch = []
+new_sch = []
+
+subs_dict = {}
+
+for a,b in list(zip(sub_list,sub_titles)):
+    subs_dict[a] = b
+
+for x in subs_dict:
+    print(subs_dict[x],x)
+
+df = pd.DataFrame([subs_dict])
+result = df.transpose()
+result.to_csv('subs.csv')
+
+# for y in new_spa:
+#     new_sch.append(y[0].lstrip())
+#     old_sch.append(y[1].lstrip())
+#
+# sub_dict = {}
+# for x,y in list(zip(old_sch,sub_list)):
+#     sub_dict[x] = y
+#     # print(x,y)
+
+#
+# for c in sub_dict:
+#     for x in new_sch:
+#         if movie_name == c and x == 'English':
+#             print(movie_name,sub_dict[movie_name])
+
+# for x in new_sch:
+#     print(x)
