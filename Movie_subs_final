@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 # browser = Firefox(executable_path=r"C:\FireFox-WebDriver\geckodriver.exe",options=opts)
 url = 'https://subscene.com/subtitles/'
 user_input = input('Enter the name of movie: ')
+user_input = user_input.replace(" ","-")
 movie_url = url + user_input
 # print(movie_url)
 sub_list = []
